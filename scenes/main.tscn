@@ -1,0 +1,163 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://scripts/main.gd" id="1_2x6i7"]
+[ext_resource type="Script" path="res://scripts/camera_controller.gd" id="2_gvht5"]
+[ext_resource type="Script" path="res://scripts/parallax_layer_controller.gd" id="3_qo74b"]
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_2x6i7")
+
+[node name="ParallaxRoot" type="Node2D" parent="."]
+
+[node name="ParallaxManager" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("3_qo74b")
+
+[node name="GroundReference" type="Node2D" parent="."]
+
+[node name="GroundLine" type="Line2D" parent="GroundReference"]
+default_color = Color(0.266667, 0.239216, 0.184314, 1)
+width = 4.0
+points = PackedVector2Array(-1400, 620, 2600, 620)
+
+[node name="TrackLine" type="Line2D" parent="GroundReference"]
+default_color = Color(0.811765, 0.682353, 0.466667, 1)
+width = 3.0
+points = PackedVector2Array(-1400, 640, 2600, 640)
+
+[node name="MarkerA" type="Line2D" parent="GroundReference"]
+default_color = Color(0.945098, 0.929412, 0.745098, 1)
+width = 4.0
+points = PackedVector2Array(120, 610, 120, 670)
+
+[node name="MarkerALabel" type="Label" parent="GroundReference"]
+position = Vector2(88, 668)
+text = "x=120"
+
+[node name="MarkerB" type="Line2D" parent="GroundReference"]
+default_color = Color(0.945098, 0.929412, 0.745098, 1)
+width = 4.0
+points = PackedVector2Array(760, 610, 760, 670)
+
+[node name="MarkerBLabel" type="Label" parent="GroundReference"]
+position = Vector2(728, 668)
+text = "x=760"
+
+[node name="MarkerC" type="Line2D" parent="GroundReference"]
+default_color = Color(0.945098, 0.929412, 0.745098, 1)
+width = 4.0
+points = PackedVector2Array(1420, 610, 1420, 670)
+
+[node name="MarkerCLabel" type="Label" parent="GroundReference"]
+position = Vector2(1380, 668)
+text = "x=1420"
+
+[node name="Camera2D" type="Camera2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(640, 360)
+script = ExtResource("2_gvht5")
+
+[node name="HudLayer" type="CanvasLayer" parent="."]
+layer = 1
+
+[node name="ConceptCard" type="PanelContainer" parent="HudLayer"]
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 420.0
+offset_bottom = 144.0
+
+[node name="ConceptMargin" type="MarginContainer" parent="HudLayer/ConceptCard"]
+offset_right = 400.0
+offset_bottom = 124.0
+theme_override_constants/margin_left = 14
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 14
+theme_override_constants/margin_bottom = 12
+
+[node name="ConceptVBox" type="VBoxContainer" parent="HudLayer/ConceptCard/ConceptMargin"]
+offset_right = 372.0
+offset_bottom = 100.0
+theme_override_constants/separation = 6
+
+[node name="ConceptTitle" type="Label" parent="HudLayer/ConceptCard/ConceptMargin/ConceptVBox"]
+text = "Parallax2D Demo"
+
+[node name="FocusValue" type="Label" parent="HudLayer/ConceptCard/ConceptMargin/ConceptVBox"]
+unique_name_in_owner = true
+autowrap_mode = 3
+text = "focus"
+
+[node name="StatusCard" type="PanelContainer" parent="HudLayer"]
+offset_left = 20.0
+offset_top = 160.0
+offset_right = 420.0
+offset_bottom = 346.0
+
+[node name="StatusMargin" type="MarginContainer" parent="HudLayer/StatusCard"]
+offset_right = 400.0
+offset_bottom = 186.0
+theme_override_constants/margin_left = 14
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 14
+theme_override_constants/margin_bottom = 12
+
+[node name="StatusVBox" type="VBoxContainer" parent="HudLayer/StatusCard/StatusMargin"]
+offset_right = 372.0
+offset_bottom = 162.0
+theme_override_constants/separation = 6
+
+[node name="StatusTitle" type="Label" parent="HudLayer/StatusCard/StatusMargin/StatusVBox"]
+text = "狀態卡"
+
+[node name="StatusValue" type="Label" parent="HudLayer/StatusCard/StatusMargin/StatusVBox"]
+unique_name_in_owner = true
+autowrap_mode = 3
+text = "status"
+
+[node name="LayerCard" type="PanelContainer" parent="HudLayer"]
+unique_name_in_owner = true
+offset_left = 20.0
+offset_top = 362.0
+offset_right = 420.0
+offset_bottom = 590.0
+
+[node name="LayerMargin" type="MarginContainer" parent="HudLayer/LayerCard"]
+offset_right = 400.0
+offset_bottom = 228.0
+theme_override_constants/margin_left = 14
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 14
+theme_override_constants/margin_bottom = 12
+
+[node name="LayerVBox" type="VBoxContainer" parent="HudLayer/LayerCard/LayerMargin"]
+offset_right = 372.0
+offset_bottom = 204.0
+theme_override_constants/separation = 6
+
+[node name="LayerTitle" type="Label" parent="HudLayer/LayerCard/LayerMargin/LayerVBox"]
+text = "圖層卡"
+
+[node name="LayerValue" type="Label" parent="HudLayer/LayerCard/LayerMargin/LayerVBox"]
+unique_name_in_owner = true
+autowrap_mode = 3
+text = "layers"
+
+[node name="ControlHint" type="PanelContainer" parent="HudLayer"]
+offset_left = 20.0
+offset_top = 606.0
+offset_right = 460.0
+offset_bottom = 700.0
+
+[node name="HintMargin" type="MarginContainer" parent="HudLayer/ControlHint"]
+offset_right = 440.0
+offset_bottom = 94.0
+theme_override_constants/margin_left = 14
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 14
+theme_override_constants/margin_bottom = 10
+
+[node name="HintLabel" type="Label" parent="HudLayer/ControlHint/HintMargin"]
+offset_right = 412.0
+offset_bottom = 74.0
+autowrap_mode = 3
+text = "A / D 或左右鍵: 移動 Camera2D\nW / S 或上下鍵: Zoom in / out\n1: 顯示 scroll_scale  2: 顯示 repeat_size guide\n3: 切換 scroll_offset  4: 切換 repeat_times\nR: 重設  Tab: 切換 HUD 詳細模式"
