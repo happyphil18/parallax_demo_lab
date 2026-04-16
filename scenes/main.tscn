@@ -1,13 +1,359 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene load_steps=4 format=3 uid="uid://igs252cc8xqc"]
 
-[ext_resource type="Script" path="res://scripts/main.gd" id="1_2x6i7"]
-[ext_resource type="Script" path="res://scripts/camera_controller.gd" id="2_gvht5"]
-[ext_resource type="Script" path="res://scripts/parallax_layer_controller.gd" id="3_qo74b"]
+[ext_resource type="Script" uid="uid://dnd831v7yc6wb" path="res://scripts/main.gd" id="1_2x6i7"]
+[ext_resource type="Script" uid="uid://bu4motyv7sdga" path="res://scripts/camera_controller.gd" id="2_gvht5"]
+[ext_resource type="Script" uid="uid://c6ewxgfsuwu2b" path="res://scripts/parallax_layer_controller.gd" id="3_qo74b"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_2x6i7")
 
 [node name="ParallaxRoot" type="Node2D" parent="."]
+
+[node name="LayerSky" type="Parallax2D" parent="ParallaxRoot"]
+scroll_scale = Vector2(0.1, 1)
+repeat_size = Vector2(2048, 0)
+
+[node name="Content" type="Node2D" parent="ParallaxRoot/LayerSky"]
+
+[node name="SkyRect" type="Polygon2D" parent="ParallaxRoot/LayerSky/Content"]
+color = Color(0.494, 0.749, 0.992, 1)
+polygon = PackedVector2Array(0, 0, 2048, 0, 2048, 280, 0, 280)
+
+[node name="RingA" type="Line2D" parent="ParallaxRoot/LayerSky/Content"]
+points = PackedVector2Array(140, 52, 164.249, 66, 164.249, 94, 140, 108, 115.751, 94, 115.751, 66)
+closed = true
+width = 2.0
+default_color = Color(0.322, 0.561, 0.906, 0.8)
+
+[node name="RingB" type="Line2D" parent="ParallaxRoot/LayerSky/Content"]
+points = PackedVector2Array(640, 52, 664.249, 66, 664.249, 94, 640, 108, 615.751, 94, 615.751, 66)
+closed = true
+width = 2.0
+default_color = Color(0.322, 0.561, 0.906, 0.8)
+
+[node name="RingC" type="Line2D" parent="ParallaxRoot/LayerSky/Content"]
+points = PackedVector2Array(1120, 52, 1144.25, 66, 1144.25, 94, 1120, 108, 1095.75, 94, 1095.75, 66)
+closed = true
+width = 2.0
+default_color = Color(0.322, 0.561, 0.906, 0.8)
+
+[node name="RingD" type="Line2D" parent="ParallaxRoot/LayerSky/Content"]
+points = PackedVector2Array(1620, 52, 1644.25, 66, 1644.25, 94, 1620, 108, 1595.75, 94, 1595.75, 66)
+closed = true
+width = 2.0
+default_color = Color(0.322, 0.561, 0.906, 0.8)
+
+[node name="RepeatGuide" type="Line2D" parent="ParallaxRoot/LayerSky"]
+visible = false
+points = PackedVector2Array(0, 0, 2048, 0, 2048, 680, 0, 680)
+closed = true
+width = 2.0
+default_color = Color(0.376, 0.647, 0.992, 0.7)
+
+[node name="ScaleLabel" type="Label" parent="ParallaxRoot/LayerSky"]
+offset_left = 24.0
+offset_top = 16.0
+offset_right = 24.0
+offset_bottom = 16.0
+text = "Sky  scroll_scale=(0.1, 1.0)"
+
+[node name="LayerFarClouds" type="Parallax2D" parent="ParallaxRoot"]
+scroll_scale = Vector2(0.2, 1)
+repeat_size = Vector2(2048, 0)
+
+[node name="Content" type="Node2D" parent="ParallaxRoot/LayerFarClouds"]
+
+[node name="CloudGroup" type="Node2D" parent="ParallaxRoot/LayerFarClouds/Content"]
+
+[node name="Cloud_01" type="Node2D" parent="ParallaxRoot/LayerFarClouds/Content/CloudGroup"]
+position = Vector2(120, 70)
+
+[node name="Puff_Left" type="Polygon2D" parent="ParallaxRoot/LayerFarClouds/Content/CloudGroup/Cloud_01"]
+color = Color(0.945, 0.973, 1, 0.82)
+polygon = PackedVector2Array(-68, 0, -61.95, -13.0339, -44.525, -24.4957, -17.85, -32.908, 14.025, -37.5297, 48.6, -37.5297, 80.475, -32.908, 107.15, -24.4957, 124.575, -13.0339, 130.625, 0, 124.575, 13.0339, 107.15, 24.4957, 80.475, 32.908, 48.6, 37.5297, 14.025, 37.5297, -17.85, 32.908, -44.525, 24.4957, -61.95, 13.0339)
+
+[node name="Puff_Center" type="Polygon2D" parent="ParallaxRoot/LayerFarClouds/Content/CloudGroup/Cloud_01"]
+color = Color(0.945, 0.973, 1, 0.82)
+polygon = PackedVector2Array(-52.7, -10, -47.991, -24.6698, -34.4291, -37.5784, -13.6588, -47.049, 11.1588, -52.2509, 38.0703, -52.2509, 62.8878, -47.049, 83.6582, -37.5784, 97.2201, -24.6698, 101.929, -10, 97.2201, 4.66982, 83.6582, 17.5784, 62.8878, 27.049, 38.0703, 32.2509, 11.1588, 32.2509, -13.6588, 27.049, -34.4291, 17.5784, -47.991, 4.66982)
+
+[node name="Puff_Right" type="Polygon2D" parent="ParallaxRoot/LayerFarClouds/Content/CloudGroup/Cloud_01"]
+color = Color(0.945, 0.973, 1, 0.82)
+polygon = PackedVector2Array(40.06, 4, 44.1837, -8.31258, 56.0612, -19.1478, 74.2464, -27.1029, 95.9736, -31.4718, 119.546, -31.4718, 141.274, -27.1029, 159.459, -19.1478, 171.336, -8.31258, 175.46, 4, 171.336, 16.3126, 159.459, 27.1478, 141.274, 35.1029, 119.546, 39.4718, 95.9736, 39.4718, 74.2464, 35.1029, 56.0612, 27.1478, 44.1837, 16.3126)
+
+[node name="Cloud_02" type="Node2D" parent="ParallaxRoot/LayerFarClouds/Content/CloudGroup"]
+position = Vector2(430, 114)
+
+[node name="Puff_Left" type="Polygon2D" parent="ParallaxRoot/LayerFarClouds/Content/CloudGroup/Cloud_02"]
+color = Color(0.945, 0.973, 1, 0.82)
+polygon = PackedVector2Array(-68, 0, -61.95, -13.0339, -44.525, -24.4957, -17.85, -32.908, 14.025, -37.5297, 48.6, -37.5297, 80.475, -32.908, 107.15, -24.4957, 124.575, -13.0339, 130.625, 0, 124.575, 13.0339, 107.15, 24.4957, 80.475, 32.908, 48.6, 37.5297, 14.025, 37.5297, -17.85, 32.908, -44.525, 24.4957, -61.95, 13.0339)
+
+[node name="Puff_Center" type="Polygon2D" parent="ParallaxRoot/LayerFarClouds/Content/CloudGroup/Cloud_02"]
+color = Color(0.945, 0.973, 1, 0.82)
+polygon = PackedVector2Array(-52.7, -10, -47.991, -24.6698, -34.4291, -37.5784, -13.6588, -47.049, 11.1588, -52.2509, 38.0703, -52.2509, 62.8878, -47.049, 83.6582, -37.5784, 97.2201, -24.6698, 101.929, -10, 97.2201, 4.66982, 83.6582, 17.5784, 62.8878, 27.049, 38.0703, 32.2509, 11.1588, 32.2509, -13.6588, 27.049, -34.4291, 17.5784, -47.991, 4.66982)
+
+[node name="Puff_Right" type="Polygon2D" parent="ParallaxRoot/LayerFarClouds/Content/CloudGroup/Cloud_02"]
+color = Color(0.945, 0.973, 1, 0.82)
+polygon = PackedVector2Array(40.06, 4, 44.1837, -8.31258, 56.0612, -19.1478, 74.2464, -27.1029, 95.9736, -31.4718, 119.546, -31.4718, 141.274, -27.1029, 159.459, -19.1478, 171.336, -8.31258, 175.46, 4, 171.336, 16.3126, 159.459, 27.1478, 141.274, 35.1029, 119.546, 39.4718, 95.9736, 39.4718, 74.2464, 35.1029, 56.0612, 27.1478, 44.1837, 16.3126)
+
+[node name="Cloud_03" type="Node2D" parent="ParallaxRoot/LayerFarClouds/Content/CloudGroup"]
+position = Vector2(820, 70)
+
+[node name="Puff_Left" type="Polygon2D" parent="ParallaxRoot/LayerFarClouds/Content/CloudGroup/Cloud_03"]
+color = Color(0.945, 0.973, 1, 0.82)
+polygon = PackedVector2Array(-68, 0, -61.95, -13.0339, -44.525, -24.4957, -17.85, -32.908, 14.025, -37.5297, 48.6, -37.5297, 80.475, -32.908, 107.15, -24.4957, 124.575, -13.0339, 130.625, 0, 124.575, 13.0339, 107.15, 24.4957, 80.475, 32.908, 48.6, 37.5297, 14.025, 37.5297, -17.85, 32.908, -44.525, 24.4957, -61.95, 13.0339)
+
+[node name="Puff_Center" type="Polygon2D" parent="ParallaxRoot/LayerFarClouds/Content/CloudGroup/Cloud_03"]
+color = Color(0.945, 0.973, 1, 0.82)
+polygon = PackedVector2Array(-52.7, -10, -47.991, -24.6698, -34.4291, -37.5784, -13.6588, -47.049, 11.1588, -52.2509, 38.0703, -52.2509, 62.8878, -47.049, 83.6582, -37.5784, 97.2201, -24.6698, 101.929, -10, 97.2201, 4.66982, 83.6582, 17.5784, 62.8878, 27.049, 38.0703, 32.2509, 11.1588, 32.2509, -13.6588, 27.049, -34.4291, 17.5784, -47.991, 4.66982)
+
+[node name="Puff_Right" type="Polygon2D" parent="ParallaxRoot/LayerFarClouds/Content/CloudGroup/Cloud_03"]
+color = Color(0.945, 0.973, 1, 0.82)
+polygon = PackedVector2Array(40.06, 4, 44.1837, -8.31258, 56.0612, -19.1478, 74.2464, -27.1029, 95.9736, -31.4718, 119.546, -31.4718, 141.274, -27.1029, 159.459, -19.1478, 171.336, -8.31258, 175.46, 4, 171.336, 16.3126, 159.459, 27.1478, 141.274, 35.1029, 119.546, 39.4718, 95.9736, 39.4718, 74.2464, 35.1029, 56.0612, 27.1478, 44.1837, 16.3126)
+
+[node name="Cloud_04" type="Node2D" parent="ParallaxRoot/LayerFarClouds/Content/CloudGroup"]
+position = Vector2(1210, 114)
+
+[node name="Puff_Left" type="Polygon2D" parent="ParallaxRoot/LayerFarClouds/Content/CloudGroup/Cloud_04"]
+color = Color(0.945, 0.973, 1, 0.82)
+polygon = PackedVector2Array(-68, 0, -61.95, -13.0339, -44.525, -24.4957, -17.85, -32.908, 14.025, -37.5297, 48.6, -37.5297, 80.475, -32.908, 107.15, -24.4957, 124.575, -13.0339, 130.625, 0, 124.575, 13.0339, 107.15, 24.4957, 80.475, 32.908, 48.6, 37.5297, 14.025, 37.5297, -17.85, 32.908, -44.525, 24.4957, -61.95, 13.0339)
+
+[node name="Puff_Center" type="Polygon2D" parent="ParallaxRoot/LayerFarClouds/Content/CloudGroup/Cloud_04"]
+color = Color(0.945, 0.973, 1, 0.82)
+polygon = PackedVector2Array(-52.7, -10, -47.991, -24.6698, -34.4291, -37.5784, -13.6588, -47.049, 11.1588, -52.2509, 38.0703, -52.2509, 62.8878, -47.049, 83.6582, -37.5784, 97.2201, -24.6698, 101.929, -10, 97.2201, 4.66982, 83.6582, 17.5784, 62.8878, 27.049, 38.0703, 32.2509, 11.1588, 32.2509, -13.6588, 27.049, -34.4291, 17.5784, -47.991, 4.66982)
+
+[node name="Puff_Right" type="Polygon2D" parent="ParallaxRoot/LayerFarClouds/Content/CloudGroup/Cloud_04"]
+color = Color(0.945, 0.973, 1, 0.82)
+polygon = PackedVector2Array(40.06, 4, 44.1837, -8.31258, 56.0612, -19.1478, 74.2464, -27.1029, 95.9736, -31.4718, 119.546, -31.4718, 141.274, -27.1029, 159.459, -19.1478, 171.336, -8.31258, 175.46, 4, 171.336, 16.3126, 159.459, 27.1478, 141.274, 35.1029, 119.546, 39.4718, 95.9736, 39.4718, 74.2464, 35.1029, 56.0612, 27.1478, 44.1837, 16.3126)
+
+[node name="RepeatGuide" type="Line2D" parent="ParallaxRoot/LayerFarClouds"]
+visible = false
+points = PackedVector2Array(0, 0, 2048, 0, 2048, 680, 0, 680)
+closed = true
+width = 2.0
+default_color = Color(0.741, 0.871, 1, 0.7)
+
+[node name="ScaleLabel" type="Label" parent="ParallaxRoot/LayerFarClouds"]
+offset_left = 24.0
+offset_top = 86.0
+offset_right = 24.0
+offset_bottom = 86.0
+text = "FarClouds  scroll_scale=(0.2, 1.0)"
+
+[node name="LayerNearClouds" type="Parallax2D" parent="ParallaxRoot"]
+scroll_scale = Vector2(0.3, 1)
+repeat_size = Vector2(2048, 0)
+
+[node name="Content" type="Node2D" parent="ParallaxRoot/LayerNearClouds"]
+
+[node name="CloudGroup" type="Node2D" parent="ParallaxRoot/LayerNearClouds/Content"]
+
+[node name="Cloud_01" type="Node2D" parent="ParallaxRoot/LayerNearClouds/Content/CloudGroup"]
+position = Vector2(120, 120)
+
+[node name="Puff_Left" type="Polygon2D" parent="ParallaxRoot/LayerNearClouds/Content/CloudGroup/Cloud_01"]
+color = Color(1, 1, 1, 0.95)
+polygon = PackedVector2Array(-80.385, 0, -73.2283, -16.2924, -52.6105, -30.6171, -21.045, -41.135, 16.5375, -46.9144, 57.27, -46.9144, 94.8525, -41.135, 126.418, -30.6171, 147.036, -16.2924, 154.193, 0, 147.036, 16.2924, 126.418, 30.6171, 94.8525, 41.135, 57.27, 46.9144, 16.5375, 46.9144, -21.045, 41.135, -52.6105, 30.6171, -73.2283, 16.2924)
+
+[node name="Puff_Center" type="Polygon2D" parent="ParallaxRoot/LayerNearClouds/Content/CloudGroup/Cloud_01"]
+color = Color(1, 1, 1, 0.95)
+polygon = PackedVector2Array(-73.1, -10, -66.5904, -28.5284, -47.8415, -44.8215, -19.1373, -56.788, 15.1127, -63.3676, 52.2376, -63.3676, 86.4875, -56.788, 115.192, -44.8215, 133.941, -28.5284, 140.45, -10, 133.941, 8.52842, 115.192, 24.8215, 86.4875, 36.788, 52.2376, 43.3676, 15.1127, 43.3676, -19.1373, 36.788, -47.8415, 24.8215, -66.5904, 8.52842)
+
+[node name="Puff_Right" type="Polygon2D" parent="ParallaxRoot/LayerNearClouds/Content/CloudGroup/Cloud_01"]
+color = Color(1, 1, 1, 0.95)
+polygon = PackedVector2Array(50.08, 4, 55.7706, -11.3907, 72.164, -24.9311, 97.2606, -34.8683, 127.239, -40.3272, 159.761, -40.3272, 189.739, -34.8683, 214.836, -24.9311, 231.229, -11.3907, 236.92, 4, 231.229, 19.3907, 214.836, 32.9311, 189.739, 42.8683, 159.761, 48.3272, 127.239, 48.3272, 97.2606, 42.8683, 72.164, 32.9311, 55.7706, 19.3907)
+
+[node name="Cloud_02" type="Node2D" parent="ParallaxRoot/LayerNearClouds/Content/CloudGroup"]
+position = Vector2(520, 164)
+
+[node name="Puff_Left" type="Polygon2D" parent="ParallaxRoot/LayerNearClouds/Content/CloudGroup/Cloud_02"]
+color = Color(1, 1, 1, 0.95)
+polygon = PackedVector2Array(-80.385, 0, -73.2283, -16.2924, -52.6105, -30.6171, -21.045, -41.135, 16.5375, -46.9144, 57.27, -46.9144, 94.8525, -41.135, 126.418, -30.6171, 147.036, -16.2924, 154.193, 0, 147.036, 16.2924, 126.418, 30.6171, 94.8525, 41.135, 57.27, 46.9144, 16.5375, 46.9144, -21.045, 41.135, -52.6105, 30.6171, -73.2283, 16.2924)
+
+[node name="Puff_Center" type="Polygon2D" parent="ParallaxRoot/LayerNearClouds/Content/CloudGroup/Cloud_02"]
+color = Color(1, 1, 1, 0.95)
+polygon = PackedVector2Array(-73.1, -10, -66.5904, -28.5284, -47.8415, -44.8215, -19.1373, -56.788, 15.1127, -63.3676, 52.2376, -63.3676, 86.4875, -56.788, 115.192, -44.8215, 133.941, -28.5284, 140.45, -10, 133.941, 8.52842, 115.192, 24.8215, 86.4875, 36.788, 52.2376, 43.3676, 15.1127, 43.3676, -19.1373, 36.788, -47.8415, 24.8215, -66.5904, 8.52842)
+
+[node name="Puff_Right" type="Polygon2D" parent="ParallaxRoot/LayerNearClouds/Content/CloudGroup/Cloud_02"]
+color = Color(1, 1, 1, 0.95)
+polygon = PackedVector2Array(50.08, 4, 55.7706, -11.3907, 72.164, -24.9311, 97.2606, -34.8683, 127.239, -40.3272, 159.761, -40.3272, 189.739, -34.8683, 214.836, -24.9311, 231.229, -11.3907, 236.92, 4, 231.229, 19.3907, 214.836, 32.9311, 189.739, 42.8683, 159.761, 48.3272, 127.239, 48.3272, 97.2606, 42.8683, 72.164, 32.9311, 55.7706, 19.3907)
+
+[node name="Cloud_03" type="Node2D" parent="ParallaxRoot/LayerNearClouds/Content/CloudGroup"]
+position = Vector2(1020, 120)
+
+[node name="Puff_Left" type="Polygon2D" parent="ParallaxRoot/LayerNearClouds/Content/CloudGroup/Cloud_03"]
+color = Color(1, 1, 1, 0.95)
+polygon = PackedVector2Array(-80.385, 0, -73.2283, -16.2924, -52.6105, -30.6171, -21.045, -41.135, 16.5375, -46.9144, 57.27, -46.9144, 94.8525, -41.135, 126.418, -30.6171, 147.036, -16.2924, 154.193, 0, 147.036, 16.2924, 126.418, 30.6171, 94.8525, 41.135, 57.27, 46.9144, 16.5375, 46.9144, -21.045, 41.135, -52.6105, 30.6171, -73.2283, 16.2924)
+
+[node name="Puff_Center" type="Polygon2D" parent="ParallaxRoot/LayerNearClouds/Content/CloudGroup/Cloud_03"]
+color = Color(1, 1, 1, 0.95)
+polygon = PackedVector2Array(-73.1, -10, -66.5904, -28.5284, -47.8415, -44.8215, -19.1373, -56.788, 15.1127, -63.3676, 52.2376, -63.3676, 86.4875, -56.788, 115.192, -44.8215, 133.941, -28.5284, 140.45, -10, 133.941, 8.52842, 115.192, 24.8215, 86.4875, 36.788, 52.2376, 43.3676, 15.1127, 43.3676, -19.1373, 36.788, -47.8415, 24.8215, -66.5904, 8.52842)
+
+[node name="Puff_Right" type="Polygon2D" parent="ParallaxRoot/LayerNearClouds/Content/CloudGroup/Cloud_03"]
+color = Color(1, 1, 1, 0.95)
+polygon = PackedVector2Array(50.08, 4, 55.7706, -11.3907, 72.164, -24.9311, 97.2606, -34.8683, 127.239, -40.3272, 159.761, -40.3272, 189.739, -34.8683, 214.836, -24.9311, 231.229, -11.3907, 236.92, 4, 231.229, 19.3907, 214.836, 32.9311, 189.739, 42.8683, 159.761, 48.3272, 127.239, 48.3272, 97.2606, 42.8683, 72.164, 32.9311, 55.7706, 19.3907)
+
+[node name="RepeatGuide" type="Line2D" parent="ParallaxRoot/LayerNearClouds"]
+visible = false
+points = PackedVector2Array(0, 0, 2048, 0, 2048, 680, 0, 680)
+closed = true
+width = 2.0
+default_color = Color(0.898, 0.945, 1, 0.72)
+
+[node name="ScaleLabel" type="Label" parent="ParallaxRoot/LayerNearClouds"]
+offset_left = 24.0
+offset_top = 136.0
+offset_right = 24.0
+offset_bottom = 136.0
+text = "NearClouds  scroll_scale=(0.3, 1.0)"
+
+[node name="LayerHills" type="Parallax2D" parent="ParallaxRoot"]
+scroll_scale = Vector2(0.5, 1)
+repeat_size = Vector2(2048, 0)
+
+[node name="Content" type="Node2D" parent="ParallaxRoot/LayerHills"]
+
+[node name="HillShape" type="Polygon2D" parent="ParallaxRoot/LayerHills/Content"]
+color = Color(0.361, 0.706, 0.486, 1)
+polygon = PackedVector2Array(0, 620, 0, 510, 180, 430, 370, 520, 620, 420, 890, 530, 1160, 410, 1420, 520, 1710, 430, 1980, 510, 2048, 620)
+
+[node name="RepeatGuide" type="Line2D" parent="ParallaxRoot/LayerHills"]
+visible = false
+points = PackedVector2Array(0, 0, 2048, 0, 2048, 680, 0, 680)
+closed = true
+width = 2.0
+default_color = Color(0.478, 0.914, 0.588, 0.68)
+
+[node name="ScaleLabel" type="Label" parent="ParallaxRoot/LayerHills"]
+offset_left = 24.0
+offset_top = 371.0
+offset_right = 24.0
+offset_bottom = 371.0
+text = "Hills  scroll_scale=(0.5, 1.0)"
+
+[node name="LayerForest" type="Parallax2D" parent="ParallaxRoot"]
+scroll_scale = Vector2(0.7, 1)
+repeat_size = Vector2(2048, 0)
+
+[node name="Content" type="Node2D" parent="ParallaxRoot/LayerForest"]
+
+[node name="Ground" type="Polygon2D" parent="ParallaxRoot/LayerForest/Content"]
+color = Color(0.145, 0.341, 0.204, 1)
+polygon = PackedVector2Array(0, 620, 0, 680, 2048, 680, 2048, 620)
+
+[node name="TreeGroup" type="Node2D" parent="ParallaxRoot/LayerForest/Content"]
+
+[node name="Tree_01" type="Node2D" parent="ParallaxRoot/LayerForest/Content/TreeGroup"]
+position = Vector2(120, 522)
+
+[node name="Trunk" type="Polygon2D" parent="ParallaxRoot/LayerForest/Content/TreeGroup/Tree_01"]
+color = Color(0.239, 0.161, 0.094, 1)
+polygon = PackedVector2Array(-7, 40, 7, 40, 7, 96, -7, 96)
+
+[node name="Crown" type="Polygon2D" parent="ParallaxRoot/LayerForest/Content/TreeGroup/Tree_01"]
+color = Color(0.165, 0.42, 0.243, 1)
+polygon = PackedVector2Array(0, -56, 38, 18, 18, 18, 54, 74, -54, 74, -18, 18, -38, 18)
+
+[node name="Tree_02" type="Node2D" parent="ParallaxRoot/LayerForest/Content/TreeGroup"]
+position = Vector2(290, 528)
+
+[node name="Trunk" type="Polygon2D" parent="ParallaxRoot/LayerForest/Content/TreeGroup/Tree_02"]
+color = Color(0.239, 0.161, 0.094, 1)
+polygon = PackedVector2Array(-7, 40, 7, 40, 7, 96, -7, 96)
+
+[node name="Crown" type="Polygon2D" parent="ParallaxRoot/LayerForest/Content/TreeGroup/Tree_02"]
+color = Color(0.165, 0.42, 0.243, 1)
+polygon = PackedVector2Array(0, -56, 38, 18, 18, 18, 54, 74, -54, 74, -18, 18, -38, 18)
+
+[node name="Tree_03" type="Node2D" parent="ParallaxRoot/LayerForest/Content/TreeGroup"]
+position = Vector2(470, 520)
+
+[node name="Trunk" type="Polygon2D" parent="ParallaxRoot/LayerForest/Content/TreeGroup/Tree_03"]
+color = Color(0.239, 0.161, 0.094, 1)
+polygon = PackedVector2Array(-7, 40, 7, 40, 7, 96, -7, 96)
+
+[node name="Crown" type="Polygon2D" parent="ParallaxRoot/LayerForest/Content/TreeGroup/Tree_03"]
+color = Color(0.165, 0.42, 0.243, 1)
+polygon = PackedVector2Array(0, -56, 38, 18, 18, 18, 54, 74, -54, 74, -18, 18, -38, 18)
+
+[node name="Tree_04" type="Node2D" parent="ParallaxRoot/LayerForest/Content/TreeGroup"]
+position = Vector2(690, 530)
+
+[node name="Trunk" type="Polygon2D" parent="ParallaxRoot/LayerForest/Content/TreeGroup/Tree_04"]
+color = Color(0.239, 0.161, 0.094, 1)
+polygon = PackedVector2Array(-7, 40, 7, 40, 7, 96, -7, 96)
+
+[node name="Crown" type="Polygon2D" parent="ParallaxRoot/LayerForest/Content/TreeGroup/Tree_04"]
+color = Color(0.165, 0.42, 0.243, 1)
+polygon = PackedVector2Array(0, -56, 38, 18, 18, 18, 54, 74, -54, 74, -18, 18, -38, 18)
+
+[node name="Tree_05" type="Node2D" parent="ParallaxRoot/LayerForest/Content/TreeGroup"]
+position = Vector2(920, 522)
+
+[node name="Trunk" type="Polygon2D" parent="ParallaxRoot/LayerForest/Content/TreeGroup/Tree_05"]
+color = Color(0.239, 0.161, 0.094, 1)
+polygon = PackedVector2Array(-7, 40, 7, 40, 7, 96, -7, 96)
+
+[node name="Crown" type="Polygon2D" parent="ParallaxRoot/LayerForest/Content/TreeGroup/Tree_05"]
+color = Color(0.165, 0.42, 0.243, 1)
+polygon = PackedVector2Array(0, -56, 38, 18, 18, 18, 54, 74, -54, 74, -18, 18, -38, 18)
+
+[node name="Tree_06" type="Node2D" parent="ParallaxRoot/LayerForest/Content/TreeGroup"]
+position = Vector2(1160, 528)
+
+[node name="Trunk" type="Polygon2D" parent="ParallaxRoot/LayerForest/Content/TreeGroup/Tree_06"]
+color = Color(0.239, 0.161, 0.094, 1)
+polygon = PackedVector2Array(-7, 40, 7, 40, 7, 96, -7, 96)
+
+[node name="Crown" type="Polygon2D" parent="ParallaxRoot/LayerForest/Content/TreeGroup/Tree_06"]
+color = Color(0.165, 0.42, 0.243, 1)
+polygon = PackedVector2Array(0, -56, 38, 18, 18, 18, 54, 74, -54, 74, -18, 18, -38, 18)
+
+[node name="Tree_07" type="Node2D" parent="ParallaxRoot/LayerForest/Content/TreeGroup"]
+position = Vector2(1420, 521)
+
+[node name="Trunk" type="Polygon2D" parent="ParallaxRoot/LayerForest/Content/TreeGroup/Tree_07"]
+color = Color(0.239, 0.161, 0.094, 1)
+polygon = PackedVector2Array(-7, 40, 7, 40, 7, 96, -7, 96)
+
+[node name="Crown" type="Polygon2D" parent="ParallaxRoot/LayerForest/Content/TreeGroup/Tree_07"]
+color = Color(0.165, 0.42, 0.243, 1)
+polygon = PackedVector2Array(0, -56, 38, 18, 18, 18, 54, 74, -54, 74, -18, 18, -38, 18)
+
+[node name="Tree_08" type="Node2D" parent="ParallaxRoot/LayerForest/Content/TreeGroup"]
+position = Vector2(1680, 529)
+
+[node name="Trunk" type="Polygon2D" parent="ParallaxRoot/LayerForest/Content/TreeGroup/Tree_08"]
+color = Color(0.239, 0.161, 0.094, 1)
+polygon = PackedVector2Array(-7, 40, 7, 40, 7, 96, -7, 96)
+
+[node name="Crown" type="Polygon2D" parent="ParallaxRoot/LayerForest/Content/TreeGroup/Tree_08"]
+color = Color(0.165, 0.42, 0.243, 1)
+polygon = PackedVector2Array(0, -56, 38, 18, 18, 18, 54, 74, -54, 74, -18, 18, -38, 18)
+
+[node name="Tree_09" type="Node2D" parent="ParallaxRoot/LayerForest/Content/TreeGroup"]
+position = Vector2(1920, 524)
+
+[node name="Trunk" type="Polygon2D" parent="ParallaxRoot/LayerForest/Content/TreeGroup/Tree_09"]
+color = Color(0.239, 0.161, 0.094, 1)
+polygon = PackedVector2Array(-7, 40, 7, 40, 7, 96, -7, 96)
+
+[node name="Crown" type="Polygon2D" parent="ParallaxRoot/LayerForest/Content/TreeGroup/Tree_09"]
+color = Color(0.165, 0.42, 0.243, 1)
+polygon = PackedVector2Array(0, -56, 38, 18, 18, 18, 54, 74, -54, 74, -18, 18, -38, 18)
+
+[node name="RepeatGuide" type="Line2D" parent="ParallaxRoot/LayerForest"]
+visible = false
+points = PackedVector2Array(0, 0, 2048, 0, 2048, 680, 0, 680)
+closed = true
+width = 2.0
+default_color = Color(0.361, 0.682, 0.424, 0.72)
+
+[node name="ScaleLabel" type="Label" parent="ParallaxRoot/LayerForest"]
+offset_left = 24.0
+offset_top = 446.0
+offset_right = 24.0
+offset_bottom = 446.0
+text = "Forest  scroll_scale=(0.7, 1.0)"
 
 [node name="ParallaxManager" type="Node" parent="."]
 unique_name_in_owner = true
@@ -16,40 +362,49 @@ script = ExtResource("3_qo74b")
 [node name="GroundReference" type="Node2D" parent="."]
 
 [node name="GroundLine" type="Line2D" parent="GroundReference"]
-default_color = Color(0.266667, 0.239216, 0.184314, 1)
-width = 4.0
 points = PackedVector2Array(-1400, 620, 2600, 620)
+width = 4.0
+default_color = Color(0.266667, 0.239216, 0.184314, 1)
 
 [node name="TrackLine" type="Line2D" parent="GroundReference"]
-default_color = Color(0.811765, 0.682353, 0.466667, 1)
-width = 3.0
 points = PackedVector2Array(-1400, 640, 2600, 640)
+width = 3.0
+default_color = Color(0.811765, 0.682353, 0.466667, 1)
 
 [node name="MarkerA" type="Line2D" parent="GroundReference"]
-default_color = Color(0.945098, 0.929412, 0.745098, 1)
-width = 4.0
 points = PackedVector2Array(120, 610, 120, 670)
+width = 4.0
+default_color = Color(0.945098, 0.929412, 0.745098, 1)
 
 [node name="MarkerALabel" type="Label" parent="GroundReference"]
-position = Vector2(88, 668)
+offset_left = 88.0
+offset_top = 668.0
+offset_right = 88.0
+offset_bottom = 668.0
 text = "x=120"
 
 [node name="MarkerB" type="Line2D" parent="GroundReference"]
-default_color = Color(0.945098, 0.929412, 0.745098, 1)
-width = 4.0
 points = PackedVector2Array(760, 610, 760, 670)
+width = 4.0
+default_color = Color(0.945098, 0.929412, 0.745098, 1)
 
 [node name="MarkerBLabel" type="Label" parent="GroundReference"]
-position = Vector2(728, 668)
+offset_left = 728.0
+offset_top = 668.0
+offset_right = 728.0
+offset_bottom = 668.0
 text = "x=760"
 
 [node name="MarkerC" type="Line2D" parent="GroundReference"]
-default_color = Color(0.945098, 0.929412, 0.745098, 1)
-width = 4.0
 points = PackedVector2Array(1420, 610, 1420, 670)
+width = 4.0
+default_color = Color(0.945098, 0.929412, 0.745098, 1)
 
 [node name="MarkerCLabel" type="Label" parent="GroundReference"]
-position = Vector2(1380, 668)
+offset_left = 1380.0
+offset_top = 668.0
+offset_right = 1380.0
+offset_bottom = 668.0
 text = "x=1420"
 
 [node name="Camera2D" type="Camera2D" parent="."]
@@ -58,7 +413,6 @@ position = Vector2(640, 360)
 script = ExtResource("2_gvht5")
 
 [node name="HudLayer" type="CanvasLayer" parent="."]
-layer = 1
 
 [node name="ConceptCard" type="PanelContainer" parent="HudLayer"]
 offset_left = 20.0
@@ -67,25 +421,25 @@ offset_right = 420.0
 offset_bottom = 144.0
 
 [node name="ConceptMargin" type="MarginContainer" parent="HudLayer/ConceptCard"]
-offset_right = 400.0
-offset_bottom = 124.0
+layout_mode = 2
 theme_override_constants/margin_left = 14
 theme_override_constants/margin_top = 12
 theme_override_constants/margin_right = 14
 theme_override_constants/margin_bottom = 12
 
 [node name="ConceptVBox" type="VBoxContainer" parent="HudLayer/ConceptCard/ConceptMargin"]
-offset_right = 372.0
-offset_bottom = 100.0
+layout_mode = 2
 theme_override_constants/separation = 6
 
 [node name="ConceptTitle" type="Label" parent="HudLayer/ConceptCard/ConceptMargin/ConceptVBox"]
+layout_mode = 2
 text = "Parallax2D Demo"
 
 [node name="FocusValue" type="Label" parent="HudLayer/ConceptCard/ConceptMargin/ConceptVBox"]
 unique_name_in_owner = true
-autowrap_mode = 3
+layout_mode = 2
 text = "focus"
+autowrap_mode = 3
 
 [node name="StatusCard" type="PanelContainer" parent="HudLayer"]
 offset_left = 20.0
@@ -94,25 +448,25 @@ offset_right = 420.0
 offset_bottom = 346.0
 
 [node name="StatusMargin" type="MarginContainer" parent="HudLayer/StatusCard"]
-offset_right = 400.0
-offset_bottom = 186.0
+layout_mode = 2
 theme_override_constants/margin_left = 14
 theme_override_constants/margin_top = 12
 theme_override_constants/margin_right = 14
 theme_override_constants/margin_bottom = 12
 
 [node name="StatusVBox" type="VBoxContainer" parent="HudLayer/StatusCard/StatusMargin"]
-offset_right = 372.0
-offset_bottom = 162.0
+layout_mode = 2
 theme_override_constants/separation = 6
 
 [node name="StatusTitle" type="Label" parent="HudLayer/StatusCard/StatusMargin/StatusVBox"]
+layout_mode = 2
 text = "狀態卡"
 
 [node name="StatusValue" type="Label" parent="HudLayer/StatusCard/StatusMargin/StatusVBox"]
 unique_name_in_owner = true
-autowrap_mode = 3
+layout_mode = 2
 text = "status"
+autowrap_mode = 3
 
 [node name="LayerCard" type="PanelContainer" parent="HudLayer"]
 unique_name_in_owner = true
@@ -122,25 +476,25 @@ offset_right = 420.0
 offset_bottom = 590.0
 
 [node name="LayerMargin" type="MarginContainer" parent="HudLayer/LayerCard"]
-offset_right = 400.0
-offset_bottom = 228.0
+layout_mode = 2
 theme_override_constants/margin_left = 14
 theme_override_constants/margin_top = 12
 theme_override_constants/margin_right = 14
 theme_override_constants/margin_bottom = 12
 
 [node name="LayerVBox" type="VBoxContainer" parent="HudLayer/LayerCard/LayerMargin"]
-offset_right = 372.0
-offset_bottom = 204.0
+layout_mode = 2
 theme_override_constants/separation = 6
 
 [node name="LayerTitle" type="Label" parent="HudLayer/LayerCard/LayerMargin/LayerVBox"]
+layout_mode = 2
 text = "圖層卡"
 
 [node name="LayerValue" type="Label" parent="HudLayer/LayerCard/LayerMargin/LayerVBox"]
 unique_name_in_owner = true
-autowrap_mode = 3
+layout_mode = 2
 text = "layers"
+autowrap_mode = 3
 
 [node name="ControlHint" type="PanelContainer" parent="HudLayer"]
 offset_left = 20.0
@@ -149,15 +503,17 @@ offset_right = 460.0
 offset_bottom = 700.0
 
 [node name="HintMargin" type="MarginContainer" parent="HudLayer/ControlHint"]
-offset_right = 440.0
-offset_bottom = 94.0
+layout_mode = 2
 theme_override_constants/margin_left = 14
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 14
 theme_override_constants/margin_bottom = 10
 
 [node name="HintLabel" type="Label" parent="HudLayer/ControlHint/HintMargin"]
-offset_right = 412.0
-offset_bottom = 74.0
+layout_mode = 2
+text = "A / D 或左右鍵: 移動 Camera2D
+W / S 或上下鍵: Zoom in / out
+1: 顯示 scroll_scale  2: 顯示 repeat_size guide
+3: 切換 scroll_offset  4: 切換 repeat_times
+R: 重設  Tab: 切換 HUD 詳細模式"
 autowrap_mode = 3
-text = "A / D 或左右鍵: 移動 Camera2D\nW / S 或上下鍵: Zoom in / out\n1: 顯示 scroll_scale  2: 顯示 repeat_size guide\n3: 切換 scroll_offset  4: 切換 repeat_times\nR: 重設  Tab: 切換 HUD 詳細模式"

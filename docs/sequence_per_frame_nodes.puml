@@ -1,0 +1,69 @@
+@startuml
+title 時序圖：每幀更新時，畫布如何在螢幕成像
+
+skinparam shadowing false
+skinparam sequenceMessageAlign center
+skinparam responseMessageBelowArrow true
+skinparam wrapWidth 240
+skinparam maxMessageSize 240
+
+participant "Main / Camera2D / ParallaxRoot\n:Node2D 節點" as WorldNodes
+participant "LayerSky..LayerForest / GroundReference\n:CanvasItem" as WorldCanvasItems
+participant "HudLayer\n:CanvasLayer(layer = 1)" as HudLayer
+participant "FocusValue / StatusValue / LayerValue / LayerCard\n:Control / CanvasItem" as HudItems
+participant "Default Canvas\n:layer 0" as DefaultCanvas
+participant "HUD Canvas\n:layer 1" as HudCanvas
+participant "Viewport\n:root viewport" as Viewport
+participant "Window\n:root window" as Window
+actor "螢幕" as Screen
+
+loop 每一幀
+  group 第一步：2D 物件先被安排到畫布系統
+    WorldNodes -> WorldCanvasItems : 更新 Node2D / Camera2D 狀態\n改變世界中 CanvasItem 的空間關係
+    WorldNodes -> HudItems : 更新 HUD 文字與顯示狀態\n改變 UI CanvasItem 的內容
+  end
+
+  group 第二步：CanvasLayer 決定內容屬於哪一層
+    WorldCanvasItems -> DefaultCanvas : 放入預設 2D 畫布\n對應 layer 0
+    HudLayer -> HudCanvas : 建立獨立 2D rendering layer\n對應 layer 1
+    HudItems -> HudCanvas : 放入 HUD 專用畫布
+  end
+
+  group 第三步：每一層都受到 transform 影響
+    WorldNodes -> DefaultCanvas : 套用世界節點 transform\n包含 Camera2D 對世界顯示的影響
+    HudLayer -> HudCanvas : 套用 CanvasLayer transform\n決定 HUD 層的獨立顯示方式
+    Viewport -> DefaultCanvas : 套用 global canvas transform\n整理預設畫布的最終呈現
+    Viewport -> HudCanvas : 套用 global canvas transform\n整理 HUD 畫布的最終呈現
+  end
+
+  group 第四步：Viewport 把畫布內容顯示出來
+    DefaultCanvas -> Viewport : 提交世界內容
+    HudCanvas -> Viewport : 疊加 UI 內容
+    Viewport -> Viewport : 合成各 canvas layer\n形成單一視圖結果
+  end
+
+  group 第五步：Window / Stretch 讓畫面適應螢幕
+    Viewport -> Window : 提供最終 viewport 畫面
+    Window -> Window : 套用 window transform / stretch 規則\n決定縮放、比例與黑邊
+    Window -> Screen : 輸出到螢幕
+  end
+end
+
+note right of WorldCanvasItems
+Node2D、Control 最終都以 CanvasItem
+的方式存在於畫布系統內，
+不是直接畫到螢幕。
+end note
+
+note right of HudLayer
+本專案中的 HudLayer 是獨立 CanvasLayer。
+世界內容與 UI 內容因此可以分層渲染。
+end note
+
+note right of Window
+在 Godot 的實際顯示流程中，
+root viewport 由 Window 承載。
+Window / Stretch 決定畫面如何適應螢幕。
+end note
+
+@enduml

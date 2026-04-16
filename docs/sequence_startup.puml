@@ -1,0 +1,38 @@
+@startuml
+title 時序圖：場景啟動
+
+skinparam shadowing false
+skinparam sequenceMessageAlign center
+skinparam responseMessageBelowArrow true
+skinparam wrapWidth 220
+skinparam maxMessageSize 220
+
+participant "Main\n:Node2D" as Main
+participant "Camera2D\n:CameraController" as Camera2D
+participant "ParallaxManager\n:ParallaxLayerController" as ParallaxManager
+participant "FocusValue / StatusValue / LayerValue\n:Label" as HudLabels
+participant "LayerSky..LayerForest\n:Parallax2D" as ParallaxLayers
+
+Main -> Main : `_ready()`\n初始化主場景
+Main -> Main : `_apply_hud_mode()`\n套用 HUD 顯示模式
+Main -> Main : `_update_hud()`\n更新 HUD 內容
+Main -> ParallaxManager : `get_offset_mode_name()`\n取得 scroll_offset 模式名稱
+Main -> ParallaxManager : `get_repeat_mode_name()`\n取得 repeat_times 模式名稱
+Main -> ParallaxManager : `get_layer_lines()`\n取得圖層摘要文字
+Main -> HudLabels : render initial focus/status/layer text\n渲染初始 HUD 文字
+
+Camera2D -> Camera2D : `_ready()`\n快取初始位置與縮放
+
+ParallaxManager -> ParallaxManager : `_ready()`\n初始化視差管理器
+ParallaxManager -> ParallaxManager : `_make_layer_data(...)`\n建立圖層資料表
+ParallaxManager -> ParallaxManager : `_apply_modes()`\n套用目前示範模式
+ParallaxManager -> ParallaxLayers : initialize label visibility,\nguide visibility,\noffset, repeat_times\n初始化各層顯示與參數
+
+note right of Main
+啟動階段重點：
+- 本地初始化
+- 控制器協作
+- 首次 HUD 刷新
+end note
+
+@enduml

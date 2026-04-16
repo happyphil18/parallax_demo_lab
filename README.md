@@ -24,3 +24,18 @@
 - `repeat_size` guide 會顯示每層的水平循環區間
 - `scroll_offset` 會改變圖層起始位置
 - 拉遠鏡頭後，`repeat_times` 較低時更容易露出循環覆蓋不足的問題
+
+## 類別結構圖
+
+- PlantUML class diagram: [docs/class_structure.puml](</Users/tywang/project/ai course/跟 AI 一起開發遊戲/課堂5/parallax_demo_lab/docs/class_structure.puml>)
+
+## 互動流程圖
+
+- Scene startup: [docs/sequence_startup.puml](</Users/tywang/project/ai course/跟 AI 一起開發遊戲/課堂5/parallax_demo_lab/docs/sequence_startup.puml>)
+- Per-frame update: [docs/sequence_per_frame.puml](</Users/tywang/project/ai course/跟 AI 一起開發遊戲/課堂5/parallax_demo_lab/docs/sequence_per_frame.puml>)
+- Per-frame update between nodes: [docs/sequence_per_frame_nodes.puml](</Users/tywang/project/ai course/跟 AI 一起開發遊戲/課堂5/parallax_demo_lab/docs/sequence_per_frame_nodes.puml>)
+- Input handling: [docs/sequence_input_handling.puml](</Users/tywang/project/ai course/跟 AI 一起開發遊戲/課堂5/parallax_demo_lab/docs/sequence_input_handling.puml>)
+
+## Collaboration Scenarios
+
+- Collaboration diagrams are not currently included in `docs/`.

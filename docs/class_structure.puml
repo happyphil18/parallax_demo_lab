@@ -1,0 +1,97 @@
+@startuml
+title Parallax2D Demo Lab - 類別結構圖
+
+skinparam shadowing false
+skinparam classAttributeIconSize 0
+skinparam wrapWidth 220
+skinparam maxMessageSize 220
+
+package "Godot 基底型別" {
+  abstract class GodotNode as "Node"
+  abstract class GodotNode2D as "Node2D"
+  abstract class GodotCamera2D as "Camera2D"
+  abstract class GodotCanvasItem as "CanvasItem"
+  abstract class GodotParallax2D as "Parallax2D"
+  class GodotLabel as "Label"
+  class GodotPanelContainer as "PanelContainer"
+  class GodotInputEvent as "InputEvent"
+}
+
+package "專案腳本節點" {
+  class Main {
+    <<node>>
+    script: main.gd
+  }
+
+  class Camera2D {
+    <<node>>
+    script: camera_controller.gd
+  }
+
+  class ParallaxManager {
+    <<node>>
+    script: parallax_layer_controller.gd
+  }
+}
+
+Main --|> GodotNode2D
+Camera2D --|> GodotCamera2D
+ParallaxManager --|> GodotNode
+
+Main --> Camera2D : 委派相機移動\n與縮放控制
+Main --> ParallaxManager : 切換示範模式\n並讀取 HUD 所需狀態
+Main --> GodotLabel : 更新 HUD 文字
+Main --> GodotPanelContainer : 切換詳細 HUD 面板
+
+ParallaxManager --> GodotParallax2D : 管理 scene 中定義的\n視差圖層
+ParallaxManager --> GodotCanvasItem : 顯示或隱藏\n標籤與 repeat guides
+
+note right of Main
+角色：
+- 場景協調者
+- 輸入分流者
+- HUD 呈現者
+
+責任：
+- 解讀示範快捷鍵
+- 呼叫相機與視差控制
+- 維持 HUD 文字同步
+- 記錄目前觀察主題
+end note
+
+note right of Camera2D
+角色：
+- 相機移動服務
+
+責任：
+- 依輸入軸做水平移動
+- 限制 zoom in / out 範圍
+- 保存初始 transform
+- 將相機重設到啟動狀態
+end note
+
+note right of ParallaxManager
+角色：
+- 視差示範狀態管理者
+
+責任：
+- 將 scene 圖層整理成可管理集合
+- 切換標籤與 guide 顯示
+- 切換 scroll_offset 模式
+- 切換 repeat_times 模式
+- 提供 HUD 所需摘要資訊
+end note
+
+note bottom of GodotParallax2D
+由 scene 擁有的圖層節點：
+- LayerSky
+- LayerFarClouds
+- LayerNearClouds
+- LayerHills
+- LayerForest
+
+它們在 main.tscn 中配置，
+並由 ParallaxManager 管理。
+end note
+
+@enduml

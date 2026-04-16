@@ -1,0 +1,76 @@
+@startuml
+title 時序圖：輸入處理
+
+skinparam shadowing false
+skinparam sequenceMessageAlign center
+skinparam responseMessageBelowArrow true
+skinparam wrapWidth 220
+skinparam maxMessageSize 220
+
+actor Player
+participant "Godot Input System" as Input
+participant "Main\n:Node2D" as Main
+participant "Camera2D\n:CameraController" as Camera2D
+participant "ParallaxManager\n:ParallaxLayerController" as ParallaxManager
+participant "FocusValue / StatusValue / LayerValue / LayerCard\n:HUD nodes" as HudNodes
+participant "LayerSky..LayerForest\n:Parallax2D" as ParallaxLayers
+
+Player -> Input : press key\n玩家按下按鍵
+Input -> Main : `_unhandled_input(event)`\n將事件交給主場景處理
+
+alt W / Up : zoom_in_demo
+  Main -> Camera2D : `zoom_in()`\n放大鏡頭
+  Camera2D -> Camera2D : `_set_zoom_value(clamped)`\n套用限制後的縮放值
+  Main -> Main : `_update_hud()`\n更新 HUD
+  Main -> HudNodes : show new zoom\n顯示新的縮放值
+else S / Down : zoom_out_demo
+  Main -> Camera2D : `zoom_out()`\n縮小鏡頭
+  Camera2D -> Camera2D : `_set_zoom_value(clamped)`\n套用限制後的縮放值
+  Main -> Main : `_update_hud()`\n更新 HUD
+  Main -> HudNodes : show new zoom\n顯示新的縮放值
+else 1 : toggle_scroll_scale_demo
+  Main -> ParallaxManager : `toggle_scroll_scale_labels()`\n切換 scroll_scale 標籤
+  ParallaxManager -> ParallaxManager : `_apply_scroll_scale_visibility()`\n套用標籤顯示狀態
+  ParallaxManager -> ParallaxLayers : show/hide ScaleLabel\n切換各層標籤顯示
+  Main -> Main : set focus = scroll_scale comparison\n更新目前觀察主題
+  Main -> Main : `_update_hud()`\n更新 HUD
+else 2 : toggle_repeat_guides_demo
+  Main -> ParallaxManager : `toggle_repeat_guides()`\n切換 repeat guide
+  ParallaxManager -> ParallaxManager : `_apply_repeat_guide_visibility()`\n套用 guide 顯示狀態
+  ParallaxManager -> ParallaxLayers : show/hide RepeatGuide\n切換各層 guide 顯示
+  Main -> Main : set focus = repeat_size guide\n更新目前觀察主題
+  Main -> Main : `_update_hud()`\n更新 HUD
+else 3 : toggle_offset_demo
+  Main -> ParallaxManager : `cycle_offset_mode()`\n切換 offset 模式
+  ParallaxManager -> ParallaxManager : `_apply_offset_mode()`\n套用新的 offset 模式
+  ParallaxManager -> ParallaxLayers : update scroll_offset\n更新各層 scroll_offset
+  Main -> Main : set focus = scroll_offset demo\n更新目前觀察主題
+  Main -> Main : `_update_hud()`\n更新 HUD
+else 4 : toggle_repeat_times_demo
+  Main -> ParallaxManager : `cycle_repeat_mode()`\n切換 repeat_times 模式
+  ParallaxManager -> ParallaxManager : `_apply_repeat_mode()`\n套用新的 repeat_times
+  ParallaxManager -> ParallaxLayers : update repeat_times\n更新各層 repeat_times
+  Main -> Main : set focus = repeat_times zoom-out support\n更新目前觀察主題
+  Main -> Main : `_update_hud()`\n更新 HUD
+else R : reset_demo
+  Main -> Camera2D : `reset_to_origin()`\n重設相機
+  Main -> ParallaxManager : `reset_demo()`\n重設示範模式
+  ParallaxManager -> ParallaxManager : `_apply_modes()`\n重新套用預設模式
+  ParallaxManager -> ParallaxLayers : restore default visibility,\noffset, repeat_times\n恢復各層預設參數
+  Main -> Main : reset focus\n重設目前觀察主題
+  Main -> Main : `_update_hud()`\n更新 HUD
+else Tab : toggle_hud_detail_demo
+  Main -> Main : toggle show_detailed_hud\n切換詳細 HUD 模式
+  Main -> Main : `_apply_hud_mode()`\n套用 HUD 模式
+  Main -> Main : `_update_hud()`\n更新 HUD
+  Main -> HudNodes : show/hide layer card\n顯示或隱藏圖層卡片
+end
+
+note right of Main
+輸入處理重點：
+- 按鍵分流
+- 委派給控制器
+- 回饋到 HUD 與圖層
+end note
+
+@enduml

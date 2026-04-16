@@ -1,0 +1,35 @@
+@startuml
+title 時序圖：每幀更新
+
+skinparam shadowing false
+skinparam sequenceMessageAlign center
+skinparam responseMessageBelowArrow true
+skinparam wrapWidth 220
+skinparam maxMessageSize 220
+
+participant "Godot Input System" as Input
+participant "Camera2D\n:CameraController" as Camera2D
+participant "Main\n:Node2D" as Main
+participant "ParallaxManager\n:ParallaxLayerController" as ParallaxManager
+participant "FocusValue / StatusValue / LayerValue\n:Label" as HudLabels
+
+loop every frame
+  Camera2D -> Input : `get_axis(left, right)`\n讀取左右移動輸入
+  Camera2D -> Camera2D : `_process(delta)`\n執行每幀相機更新
+  Camera2D -> Camera2D : update horizontal position\n更新水平位置
+
+  Main -> Main : `_process(delta)`\n執行每幀主流程
+  Main -> Main : `_update_hud()`\n更新 HUD 內容
+  Main -> ParallaxManager : `get_offset_mode_name()`\n查詢 offset 模式
+  Main -> ParallaxManager : `get_repeat_mode_name()`\n查詢 repeat 模式
+  Main -> ParallaxManager : `get_layer_lines()`\n查詢圖層摘要
+  Main -> HudLabels : refresh camera/mode/layer text\n刷新 HUD 文字
+end
+
+note right of Main
+每幀更新重點：
+- 相機移動
+- HUD 同步
+end note
+
+@enduml
